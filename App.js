@@ -7,7 +7,7 @@ import { useFonts } from 'expo-font';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import Exercice from './components/exercice/Exercice';
+import Exercice from './components/exercice/ExerciceScreen';
 import ExerciceList from './components/exercice/ExerciceList';
 
 

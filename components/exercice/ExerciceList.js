@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-native';
-import { Exo1, Exo2, Exo3, Exo4, Exo5, Exo6, Exo7, Exo8, Exo9, Exo10, Exo11, Exo12 } from './Exercices';
+import { exos } from './Exercices';
 
 
 import { AntDesign } from '@expo/vector-icons';
-
-const exos = [<Exo1 />, <Exo2 />, <Exo3 />, <Exo4 />, <Exo5 />, <Exo6 />, <Exo7 />, <Exo8 />, <Exo9 />, <Exo10 />, <Exo11 />, <Exo12 />]
 
 function ExoItem({ id, navigation }){
     return (

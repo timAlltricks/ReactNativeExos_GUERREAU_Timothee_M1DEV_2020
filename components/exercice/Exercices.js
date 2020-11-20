@@ -121,102 +121,102 @@ export function Exo8() {
 
     const DATA = [
       {
-        id: 1,
+        id: '1',
         Nom: 'First',
         Prenom: 'Item'
       },
       {
-        id: 2,
+        id: '2',
         Nom: 'Ricard',
         Prenom: 'Jean'
       },
       {
-        id: 3,
+        id: '3',
         Nom: 'Vodka',
         Prenom: 'Steven'
       },
       {
-        id: 4,
+        id: '4',
         Nom: 'Jager',
         Prenom: 'Philippe'
       },
       {
-        id: 5,
+        id: '5',
         Nom: 'Malibu',
         Prenom: 'Sophie'
       },
       {
-        id: 6,
+        id: '6',
         Nom: 'Old Nick',
         Prenom: 'Emannuel'
       },
       {
-        id: 7,
+        id: '7',
         Nom: 'Stella-Artois',
         Prenom: 'Lisa'
       },
       {
-        id: 8,
+        id: '8',
         Nom: 'Skoll',
         Prenom: 'Tim'
       },
       {
-        id: 9,
+        id: '9',
         Nom: 'Huit-six',
         Prenom: 'Marie'
       },
       {
-        id: 10,
+        id: '10',
         Nom: 'Seize-Quatre',
         Prenom: 'Piotr'
       },
       {
-        id: 11,
+        id: '11',
         Nom: 'Fischer',
         Prenom: 'Brandon'
       },
       {
-        id: 12,
+        id: '12',
         Nom: 'Leffe',
         Prenom: 'Rudy'
       },
       {
-        id: 13,
+        id: '13',
         Nom: 'Iakov',
         Prenom: 'Paul'
       },
       {
-        id: 14,
+        id: '14',
         Nom: 'Gibsons',
         Prenom: 'Roro'
       },
       {
-        id: 15,
+        id: '15',
         Nom: 'Ciroc',
         Prenom: 'Ihab'
       },
       {
-        id: 16,
+        id: '16',
         Nom: 'Caprisun',
         Prenom: 'Vita'
       },
       {
-        id: 17,
+        id: '17',
         Nom: 'Caprisun',
         Prenom: 'Banapple'
       },
       {
-        id: 18,
+        id: '18',
         Nom: 'Camel',
         Prenom: 'Massa'
       },
       {
-        id: 19,
+        id: '19',
         Nom: 'Moula',
         Prenom: 'Enesprit'
       },
       {
-        id: 20,
+        id: '20',
         Nom: 'Tarterets',
         Prenom: 'Malik'
       }
@@ -248,7 +248,7 @@ export function Exo9(){
   
     const [data, onChangeData] = React.useState('');
   
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
       axios.get(`https://randomuser.me/api/?results=100&inc=name`)
       .then(res => {
         onChangeData(res.data.results);
@@ -259,25 +259,45 @@ export function Exo9(){
     }, [data]);
   
     const Item = ({ data }) => (
-      <View style={styles.item}>
-        <Text style={styles.title}>{data.title + ' ' + data.first + ' ' + data.last}</Text>
+      <View style={{ width: '100%' }}>
+        <Text style={[styles.title, {textAlign: 'left'}]}>{data.title + ' ' + data.first + ' ' + data.last}</Text>
       </View>
     );
   
     const renderItem = ({ item }) => (
       <Item data={item.name} />
     );
+
+    const _RenderListHeader = () => {
+        return (
+          <View>
+            <Text style={[styles.title, {color: 'rgb(80,80,225)', marginBottom: 5}]}>{'Liste des noms'}</Text>
+            <View style={{ height: 2, width: '100%', backgroundColor: 'rgb(80,80,225)', marginBottom: 25}}></View>
+          </View>
+        )
+    }
+
+    const _RenderListFooter = () => {
+      return (
+        <View style={{ height: 2, width: '100%', backgroundColor: 'rgb(80,80,225)', marginTop: 25}}></View>
+      )
+  }
    
     return data !== '' ? (
       <SafeAreaView style={styles.container}>
         <FlatList
+          style={{ width: '100%'}}
           data={data}
           renderItem={renderItem}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => index.toString()}
+          ListHeaderComponent={_RenderListHeader}
+          ListFooterComponent={_RenderListFooter}
+          initialNumToRender={10}
+          maxToRenderPerBatch={30}
         />
       </SafeAreaView>
     ) : (
-      <Text>Aucune donnée à afficher</Text>
+      <Text style={styles.title}>Aucune donnée à afficher</Text>
     );
   
 }
@@ -306,6 +326,8 @@ export function Exo12() {
     )
 }
 
+export const exos = [<Exo1 />, <Exo2 />, <Exo3 onPress={() => createButtonAlert('Bonjour !')} text="Custom button"/>, <Exo4 />, <Exo5 />, <Exo6 />, <Exo7 />, <Exo8 />, <Exo9 />, <Exo10 />, <Exo11 />, <Exo12 />]
+
 const styles = StyleSheet.create({
     square: {
       alignItems: 'center',
@@ -323,16 +345,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       padding: 10,
       backgroundColor: 'rgb(80,80,225)'
-    },
-    listItem: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: 20,
-      backgroundColor: 'rgb(80,80,225)',
-      borderBottomColor: 'rgba(255,255,255,.75)',
-      borderBottomWidth: 1
     },
     container: {
       flex: 1,
